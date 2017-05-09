@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.akash.git.Models.Repository;
@@ -14,30 +12,25 @@ import com.akash.git.Utils.AppController;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * Created by Akash Srivastava on 28-04-2017.
+ * Created by Akash Srivastava on 29-04-2017.
  */
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
+public class BookMarkAdapter extends RecyclerView.Adapter<BookMarkAdapter.MyViewHolder> {
 
     private String TAG = "PostAdapter";
-    private static List<Repository> repositoryList;
-    private static List<Repository> repositoryList1;
+    private static ArrayList<Repository> repositoryList;
     private Context context;
     private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 
-    public PostAdapter(List<Repository> repositoryList,Context context) {
+    public BookMarkAdapter(ArrayList<Repository> repositoryList, Context context) {
         this.repositoryList = repositoryList;
-        this.repositoryList1=repositoryList;
         this.context=context;
     }
 
-    public static void setRepositoryList1(List<Repository> repositoryList1) {
-        PostAdapter.repositoryList1 = repositoryList1;
-    }
 
 
     @Override
@@ -45,13 +38,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card,null);
+                .inflate(R.layout.bookmarkcard,null);
         return new MyViewHolder(itemView);
     }
 
+
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
 
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
@@ -67,22 +61,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.message.setText("Commit:"+repository.getCommit().getMessage());
         holder.profilePic.setImageUrl(repository.getAuthor().getAvatarUrl(), imageLoader);
         holder.repository=repository;
-        if(repository.isBookmarked())
-            holder.checkBox.setChecked(true);
-        else
-            holder.checkBox.setChecked(false);
+
     }
 
-    public void addItems(List<Repository> repositoryList) {
 
-        this.repositoryList = repositoryList;
-        notifyDataSetChanged();
-    }
-    public static List<Repository> getList()
-    {
 
-        return repositoryList1;
-    }
+
 
     @Override
     public int getItemCount() {
@@ -95,7 +79,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         TextView sha;
         TextView message;
         NetworkImageView profilePic;
-        CheckBox checkBox;
         Repository repository;
 
         public MyViewHolder(View itemView) {
@@ -108,22 +91,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
             profilePic = (NetworkImageView) itemView
                     .findViewById(R.id.profilePic);
-            checkBox=(CheckBox)itemView.findViewById(R.id.checkBox);
-
-
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b) {
-                        repository.setBookmarked(true);
-                      }
-                    else {
-                        repository.setBookmarked(false);
-                    }
-
-                }
-            });
-
         }
     }
 }

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import java.util.Map;
         "committer",
         "parentses"
 })
-public class Repository {
+public class Repository implements Serializable{
 
     @JsonProperty("sha")
     private String sha;
@@ -46,6 +47,20 @@ public class Repository {
     private List<Parents> parents = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    public boolean isBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        this.bookmarked = bookmarked;
+    }
+
+    @JsonProperty("sha")
+    private boolean bookmarked;
+
+
+
 
     @JsonProperty("sha")
     public String getSha() {

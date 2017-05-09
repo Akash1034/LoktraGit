@@ -15,7 +15,7 @@
         android:paddingTop="@dimen/post_item_padding_top_bottom" >
 
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -59,11 +59,7 @@
             android:paddingLeft="@dimen/post_item_status_pad_left_right"
             android:paddingRight="@dimen/post_item_status_pad_left_right"
             android:paddingTop="@dimen/post_item_status_pad_top" />
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
+
 
 
 

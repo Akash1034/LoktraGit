@@ -7,7 +7,9 @@ package com.akash.git.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Author_ {
+import java.io.Serializable;
+
+public class Author_ implements Serializable {
 
     @SerializedName("login")
     @Expose
